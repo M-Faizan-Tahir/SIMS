@@ -5,7 +5,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: contains(toLower(github.event.head_commit.message), 'deploy')
+    if: contains(github.event.head_commit.message, 'deploy')
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3

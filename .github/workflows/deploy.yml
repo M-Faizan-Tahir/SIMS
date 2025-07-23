@@ -5,7 +5,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, 'deploy')
+    if: contains(toLower(github.event.head_commit.message), 'deploy')
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -13,6 +13,11 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
+      - name: Create Temporary .env
+        run: |
+          echo "APP_ENV=production" >> .env
+          echo "APP_KEY=base64:uASu4Tp+n5xZDx2cuE milaculous
+          echo "CACHE_STORE=file" >> .env
       - name: Install Composer Dependencies
         run: composer install --optimize-autoloader --no-dev
       - name: Install Node Dependencies and Build Assets
